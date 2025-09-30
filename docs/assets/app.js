@@ -14,13 +14,21 @@ function renderGrid() {
   });
   grid.innerHTML = items.map(item => {
     const tags = (item.tags || []).map(t => `<span class="tag">#${t}</span>`).join('');
-    const audioSrc = `demos/audio/${item.file}`;
+    const filename = item.file || '';
+    const lower = filename.toLowerCase();
+    const isVideo = lower.endsWith('.mp4') || lower.endsWith('.webm') || item.type === 'video';
+    // Allow optional 'dir' to override default directories. Fall back by extension.
+    const dir = item.dir || (isVideo ? 'demos/video' : 'demos/audio');
+    const src = `${dir}/${filename}`;
+    const mediaTag = isVideo
+      ? `<video controls preload="metadata" src="${src}" style="width:100%; border-radius:10px; background:#000"></video>`
+      : `<audio controls preload="none" src="${src}"></audio>`;
     return `
       <article class="card" role="region" aria-label="${item.title}">
         <div class="card-body">
           <h3 class="card-title">${item.title}</h3>
           <div class="card-tags">${tags}</div>
-          <audio controls preload="none" src="${audioSrc}"></audio>
+          ${mediaTag}
         </div>
       </article>
     `;

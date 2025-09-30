@@ -76,6 +76,13 @@
       <section id="intro" class="section">
         <div class="container">
           <h2>Model Overview</h2>
+          <div class="toc">
+            <a href="#intro">Overview</a>
+            <a href="#arch">Model Architecture</a>
+            <a href="#data">Data Collection</a>
+            <a href="#pretrain">Two-stage Pre-training</a>
+            <a href="#sft">Supervised Fine-tuning</a>
+          </div>
           <div class="intro-card">
             <p>
               Spoken dialogue systems often rely on cascaded pipelines that transcribe, process, and resynthesize speech. While effective, this design discards paralinguistic cues and limits expressivity. Recent end-to-end methods reduce latency and better preserve these cues, yet still rely on text intermediates, creating a fundamental bottleneck. We present MOSS-Speech, a true speech-to-speech large language model that directly understands and generates speech without relying on text guidance.
@@ -84,20 +91,54 @@
               Our approach combines a modality-based layer-splitting architecture with a frozen pre-training strategy, preserving the reasoning and knowledge of pretrained text LLMs while adding native speech capabilities. Experiments show that our model achieves state-of-the-art results in spoken question answering and delivers comparable speech-to-speech performance relative to existing text-guided systems, while still maintaining competitive text performance. By narrowing the gap between text-guided and direct speech generation, our work establishes a new paradigm for expressive and efficient end-to-end speech interaction.
             </p>
           </div>
+
+          <h3 id="arch">Model Architecture</h3>
+          <div class="intro-card">
+            <p>
+              We introduce a modality‑based layer‑splitting Transformer that shares lower/middle layers for speech–text fusion and splits the top layers into text‑ and speech‑specific branches (split at block 32 in a 36‑layer model), leveraging early layers for joint representation while reserving the final layers for modality‑specific generation—thereby preserving the text LLM’s reasoning ability and adding native, high‑quality speech generation.
+            </p>
+            <img class="section-figure" src="assets/illustrations/architecture.png" alt="Model architecture with shared and split layers" />
+          </div>
+
+          <h3 id="data">Data Collection and Processing</h3>
+          <div class="intro-card">
+            <p>
+              We begin with ~9M hours of real‑world audio collected from the internet. A custom pyannote‑based voice activity detection (VAD) pipeline removes non‑speech segments, yielding ~4M hours of speech. The data are organized into two source types: (i) interleaved speech–text pre‑training, drawn primarily from podcasts; and (ii) unsupervised speech pre‑training, drawn primarily from video content. We then apply CTC‑based alignment to build interleaved sequences and, to boost knowledge density, synthesize additional interleaved data from high‑quality text corpora via TTS.
+            </p>
+            <img class="section-figure" src="assets/illustrations/data-pipeline.png" alt="Data collection and processing pipeline" />
+          </div>
+
+          <h3 id="pretrain">Two-stage Pre-training</h3>
+          <div class="intro-card">
+            <ul>
+              <li><b>Stage 1 — Speech alignment with a frozen text backbone.</b> We freeze all parameters of the Qwen‑3‑8B backbone and train only the newly added speech components: speech token embeddings, speech‑specific Transformer layers, and the speech LM head. This stage initializes speech parameters and establishes stable alignment to the pretrained text representations. Training runs for ~1 epoch with AdamW (cosine LR), initial LR 4e‑4, batch ~2.2M tokens, weight decay 0.1, and context length 14,336.</li>
+              <li><b>Stage 2 — Joint training with text knowledge preservation.</b> We expand trainable scope to enable cross‑modal adaptation, evaluating three variants: (i) unfreeze the entire model for joint training; (ii) unfreeze only shared layers while keeping text embeddings, text‑specific layers, and the text LM head frozen; (iii) progressively unfreeze shared layers from last to first. To prevent erosion of textual ability, we mix in a small portion of high‑quality text‑only pre‑training data during this stage.</li>
+            </ul>
+            <img class="section-figure" src="assets/illustrations/pretraining-stages.png" alt="Two-stage pre-training schedule" />
+          </div>
+
+          <h3 id="sft">Supervised Fine-tuning</h3>
+          <div class="intro-card">
+            <p>
+              Because high‑quality supervised data for speech assistants are scarce in the wild, we synthesize them from open‑source text SFT corpora. We first adapt question–answer pairs with the GPT‑5 API into speech‑friendly formats (e.g., removing non‑vocal content and normalizing structures), then render the adapted text into audio with multiple TTS systems. We apply automatic quality filtering with SenseVoice‑Small ASR to discard low‑fidelity items. This pipeline yields over 1.5M QA pairs in total, including ~650k English and ~860k Chinese pairs.
+            </p>
+            <p>
+              Fine‑tuning mixes four I/O modes (speech→speech, speech→text, text→speech, text→text) under a unified prompting scheme, strengthening cross‑modal alignment while maintaining text competence.
+            </p>
+            <img class="section-figure" src="assets/illustrations/sft-pipeline.png" alt="Supervised fine-tuning data and modes" />
+          </div>
         </div>
       </section>
 
       <section id="demos" class="section">
         <div class="container">
           <div class="section-head">
-            <h2>Demo Gallery</h2>
+            <h2>Demo </h2>
+            <p class="note-inline">Model inference segments in the videos have been time-accelerated.</p>
             <div class="filters">
               <button class="chip is-active" data-filter="all">All</button>
-              <button class="chip" data-filter="style">Style/Emotion</button>
-              <button class="chip" data-filter="multi">Multi-Speaker</button>
-              <button class="chip" data-filter="dialect">Dialect</button>
-              <button class="chip" data-filter="ambience">Ambience</button>
-              <button class="chip" data-filter="events">Sound Events</button>
+              <button class="chip" data-filter="zh">Chinese</button>
+              <button class="chip" data-filter="en">English</button>
             </div>
           </div>
           <div id="demo-grid" class="demo-grid" aria-live="polite"></div>
