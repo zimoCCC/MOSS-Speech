@@ -5,6 +5,7 @@
   { "title": "喵喵对话（CN #3）", "tags": ["zh"], "file": "meow-3-cn.mp4", "dir": "demos/video" },
   { "title": "Meow Dialogue (EN)", "tags": ["en"], "file": "meow-en.mp4", "dir": "demos/video" },
   { "title": "Earth Center (EN)", "tags": ["en"], "file": "earth-center-en.mp4", "dir": "demos/video" },
+  { "title": "Faster Inference (CN)", "tags": ["zh"], "file": "faster-cn.mp4", "dir": "demos/video" },
   { "title": "若知吧对话（CN）", "tags": ["zh"], "file": "ruozhiba-cn.mp4", "dir": "demos/video" },
   { "title": "重命名示例（CN）", "tags": ["zh"], "file": "rename-cn.mp4", "dir": "demos/video" }
 ]
