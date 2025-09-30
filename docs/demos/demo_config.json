@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Raspy Elderly Voice",
+    "tags": ["style"],
+    "file": "raspy_elderly_cn.mp3"
+  },
+  {
+    "title": "Angry Male Shouting",
+    "tags": ["style"],
+    "file": "angry_male_cn.mp3"
+  },
+  {
+    "title": "Multi-Speaker Dialogue",
+    "tags": ["multi"],
+    "file": "multi_speakers_dialog.mp3"
+  },
+  {
+    "title": "Shanghai Dialect Sample",
+    "tags": ["dialect"],
+    "file": "shanghai_dialect.mp3"
+  },
+  {
+    "title": "Morning Birds (Ambient)",
+    "tags": ["ambience"],
+    "file": "morning_birds.mp3"
+  },
+  {
+    "title": "Drum Beats (Sound Events)",
+    "tags": ["events"],
+    "file": "drum_hits.mp3"
+  }
+]
+
+
