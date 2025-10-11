@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作历程记录 - 预览模式</title>
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .preview-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 1.1rem;
+        }
+        .feature-list li:before {
+            content: '✨ ';
+            margin-right: 10px;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            border-color: #ffd700;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ffed4e, #ffd700);
+        }
+        .status {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .status h3 {
+            margin: 0 0 10px 0;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <h1>🎉 工作历程记录网站</h1>
+        
+        <div class="status">
+            <h3>✅ 网站已准备就绪！</h3>
+            <p>所有文件已创建完成，可以开始使用了。</p>
+        </div>
+
+        <h2>📋 网站功能特点：</h2>
+        <ul class="feature-list">
+            <li>现代化响应式设计，完美适配各种设备</li>
+            <li>自动计算工作时长和求职统计</li>
+            <li>支持图片上传和展示</li>
+            <li>深色/浅色主题切换</li>
+            <li>键盘导航支持</li>
+            <li>分享功能</li>
+            <li>平滑动画效果</li>
+            <li>完全可自定义的内容</li>
+        </ul>
+
+        <h2>🚀 下一步操作：</h2>
+        <ul class="feature-list">
+            <li>修改 <code>script.js</code> 中的工作经历数据</li>
+            <li>在 <code>images/</code> 文件夹中添加相关照片</li>
+            <li>自定义页面内容和样式</li>
+            <li>部署到GitHub Pages</li>
+        </ul>
+
+        <div class="buttons">
+            <a href="index.html" class="btn btn-primary">🌟 查看网站</a>
+            <a href="README.md" class="btn">📖 查看说明</a>
+            <a href="config.js" class="btn">⚙️ 配置文件</a>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; opacity: 0.8;">
+            <p>💝 祝你的女朋友工作顺利，前程似锦！</p>
+        </div>
+    </div>
+</body>
+</html>
